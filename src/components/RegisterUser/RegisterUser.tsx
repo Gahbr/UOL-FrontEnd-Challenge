@@ -2,6 +2,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { User } from '../../model/User/User';
 import { Button } from '../Button/Button';
+import SelectInput from '../SelectInput/SelectInput';
 import TextInput from '../TextInput/TextInput';
 
 interface RegisterFormElements extends HTMLFormControlsCollection{
@@ -67,13 +68,7 @@ export default function RegisterUser() {
                 <TextInput name="cpf" id="cpf" placeholder='CPF' required/>
                 <TextInput name="phone" id="phone" placeholder='Telefone' required/>
 
-                <select name="status" id="status" className='pl-4 pr-14 pt-3 pb-3 w-64 mb-5 border rounded-md text-lg' required>
-                  <option value="" selected disabled>Status</option>
-                  <option value="ativo" >Ativo</option>
-                  <option value="inativo" >Inativo</option>
-                  <option value="desativado" >Desativado</option>
-                  <option value="aguardando" >Aguardando Ativação</option>
-                </select>
+                <SelectInput/>
 
                 <div className='flex mt-12 mb-48'>
                   <Button.Main name={"Criar"} type='submit'/>
