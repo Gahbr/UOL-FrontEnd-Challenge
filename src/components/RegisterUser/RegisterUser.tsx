@@ -25,7 +25,7 @@ export default function RegisterUser() {
                   <option value="Ativo" >Ativo</option>
                   <option value="Inativo" >Inativo</option>
                   <option value="Desativado" >Desativado</option>
-                  <option value="Aguardando Ativacao " >Aguardando Ativação</option>
+                  <option value="aguardando" >Aguardando Ativação</option>
                 </select>
 
                 <div className='flex mt-12 mb-48'>

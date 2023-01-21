@@ -1,9 +1,29 @@
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
+import { User } from '../../model/User/User';
 import { Button } from '../Button/Button'
 
+
 export default function UserList() {
+  const [user, setuser] = useState<User[]>([]);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    getUsers();
+   
+  }, []);
+  
+   const getUsers = async()=> {
+    try {
+      const response = await fetch("http://demo0387894.mockable.io/users");
+      const json = await response.json();
+      setuser(json)
+      console.log(user);
+    } catch (error) {
+       console.error(error)
+    }
+  
+  }
   function handleRoute(route: string){
      navigate(route)
   }
@@ -20,50 +40,54 @@ export default function UserList() {
                
             </div>
         </div>
-
-        <div className='border flex justify-between pl-8 pr-9 pt-5 pb-5 mb-7'>
+        {user.map((item, index)=>(
+          <div className='border flex justify-between pl-8 pr-9 pt-5 pb-5 mb-7'>
             <div className='flex-row '>
-              <div className='text-lg  text-gray-500'><b>John Doe</b></div>
-              <div className='text-lg  text-gray-500'>John_Doe@test.com</div>
+              <div className='text-lg  text-gray-500'><b>{item.name}</b></div>
+              <div className='text-lg  text-gray-500'>{item.email}</div>
             </div>
 
             <div className='flex-row'>
-              <div className='text-lg  text-gray-500'><b>123.456.789-00</b></div>
-              <div className='text-lg  text-gray-500'>(11)9988-7766</div>
+              <div className='text-lg  text-gray-500'><b>{item.cpf}</b></div>
+              <div className='text-lg  text-gray-500'>{item.phone}</div>
             </div>
 
+          {item.status == 'ativo'&&
             <div className='flex-col self-center'>
-            <span className='h-3 w-3 mr-1 rounded-full bg-green-500 inline-block'></span>
-            <span>Ativo</span>
-          
-            
+              <span className='h-3 w-3 mr-1 rounded-full bg-green-500 inline-block'></span>
+              <span className='text-lg  text-gray-500'>{item.status}</span>
             </div>
-            <div className=' flex flex-row self-center'>
-              <Button.Alternative name='Editar' onClick={()=> alert("yamete")}/>
-            </div>
-        </div> 
-        
-        <div className='border flex justify-between pl-8 pr-9 pt-5 pb-5'>
-            <div className='flex-row '>
-              <div className='text-lg  text-gray-500'><b>John Doe2</b></div>
-              <div className='text-lg  text-gray-500'>John_Doe@test.com</div>
-            </div>
+          }
 
-            <div className='flex-row'>
-              <div className='text-lg  text-gray-500'><b>123.456.789-00</b></div>
-              <div className='text-lg  text-gray-500'>(11)9988-7766</div>
-            </div>
-
-            <div className='flex-col self-center'>
+          {item.status == 'inativo' &&
+          <div className='flex-col self-center'>
             <span className='h-3 w-3 mr-1 rounded-full bg-red-500 inline-block'></span>
-            <span>Inativo</span>
-          
-            
-            </div>
+            <span className='text-lg  text-gray-500'>{item.status}</span>
+          </div>
+          }
+
+          {item.status == 'aguardando' &&
+          <div className='flex-col self-center'>
+            <span className='h-3 w-3 mr-1 rounded-full bg-amber-500 inline-block'/>
+            <span className='text-lg  text-gray-500'>Aguardando ativação</span>
+          </div>
+          }
+
+          {item.status == 'desativado' &&
+          <div className='flex-col self-center'>
+            <span className='h-3 w-3 mr-1 rounded-full bg-gray-400 inline-block'/>
+            <span className='text-lg  text-gray-500'>Desativado</span>
+          </div>
+          }
+
             <div className=' flex flex-row self-center'>
               <Button.Alternative name='Editar' onClick={()=> alert("yamete")}/>
             </div>
         </div> 
+        ))}
+        
+        
+       <div> Exibindo {user.length} clientes</div>
     </div>
   )
 }
