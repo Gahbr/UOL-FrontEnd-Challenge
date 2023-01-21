@@ -1,8 +1,15 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../Button/Button'
 import TextInput from '../TextInput/TextInput'
 
 export default function RegisterUser() {
+  const navigate = useNavigate();
+  
+  function handleRoute(route: string){
+     navigate(route)
+  }
+
   return (
     <div >
         <div className='text-xl text-slate-700 mt-7 mb-3'>Novo Usuário</div>
@@ -16,15 +23,15 @@ export default function RegisterUser() {
 
                 <select name="status" id="status" className='pl-4 pr-14 pt-3 pb-3 w-64 mb-5 border rounded-md text-lg'>
                   <option value="Status"selected disabled>Status</option>
-                  <option value="Ativo" key="">Ativo</option>
-                  <option value="Inativo" key="">Inativo</option>
-                  <option value="Desativado" key="">Desativado</option>
-                  <option value="Aguardando Ativacao " key="">Aguardando Ativação</option>
+                  <option value="Ativo" >Ativo</option>
+                  <option value="Inativo" >Inativo</option>
+                  <option value="Desativado" >Desativado</option>
+                  <option value="Aguardando Ativacao " >Aguardando Ativação</option>
                 </select>
 
                 <div className='flex mt-12 mb-48'>
                   <Button.Main name={"Criar"}/>
-                  <Button.Alternative name={"Voltar"}/>
+                  <Button.Alternative name={"Voltar"} onClick={()=> handleRoute('/') }/>
                 </div>
             </form>
     </div>

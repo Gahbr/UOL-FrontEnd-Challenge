@@ -1,20 +1,26 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import Header from "./components/Header/Header";
-import Heading from "./components/Heading/Heading";
-import UserList from "./components/UserList/UserList";
+import { useState } from 'react'
+import './index.css'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Home from './pages/Home/Home'
+import SignUp from './pages/SignUp/SignUp'
+
+const router = createBrowserRouter([
+  {
+  path : "/",
+  element: <Home/>,
+  },
+  {
+    path : "/signup",
+    element: <SignUp/>,
+  },
+  
+])
 
 function App() {
-  const [count, setCount] = useState(0);
+  return (
+   <RouterProvider router = {router}/>
+  )
+}
 
-return (
-  <div >
-    <Header />
-    <div className="pl-44 pr-44">
-      <Heading />
-      <UserList />
-    </div>
-  </div>
-);}
+export default App
 
-export default App;
