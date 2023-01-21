@@ -5,7 +5,7 @@ import { Button } from '../Button/Button'
 
 
 export default function UserList() {
-  const [user, setuser] = useState<User[]>([]);
+  const [user, setUser] = useState<User[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,11 +18,11 @@ export default function UserList() {
       if(localStorage.getItem('users') == null){
         const response = await fetch("http://demo0387894.mockable.io/users");
         const json = await response.json();
-        setuser(json)
+        setUser(json)
         console.log(user);
       } else {
         const userStorage = JSON.parse(localStorage.getItem('users') as any) 
-        setuser(userStorage )
+        setUser(userStorage )
       }
       
     } catch (error) {
@@ -30,10 +30,16 @@ export default function UserList() {
     }
   
   }
+
   function handleRoute(route: string){
      navigate(route)
   }
   
+  function handleEdit(route : string , selectedUser:  User){ 
+    localStorage.setItem("editUser", JSON.stringify(selectedUser));
+    navigate(route);
+  }
+
   return (
     <div>
         <div className='flex'>
@@ -85,7 +91,7 @@ export default function UserList() {
           }
 
             <div className=' flex flex-row self-center'>
-              <Button.Alternative name='Editar' onClick={()=> alert("yamete")}/>
+              <Button.Alternative name='Editar' onClick={()=> handleEdit('/edit', item)}/>
             </div>
         </div>
         ))}
