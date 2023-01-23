@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div>
       <Header />
-      <div className="pl-44 pr-44">
+      <div className="pl-44 pr-44 xl:px-32 lg:px-20 md:px-3 ">
         <Heading />
         <UserList />
       </div>
