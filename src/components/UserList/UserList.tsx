@@ -17,7 +17,7 @@ export default function UserList() {
    const getUsers = async()=> {
     try {
       if(localStorage.getItem('users') == null){
-        const response = await fetch("http://demo0387894.mockable.io/users");
+        const response = await fetch("https://demo0387894.mockable.io/users");
         const json = await response.json();
         setUser(json)
       } else {
